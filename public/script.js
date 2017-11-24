@@ -19,7 +19,7 @@ const renderExpenses = (expenses) => {
   const tableBody = $('#expenses-data tbody');
   expenses.forEach(expense => {
     const tableRow = document.createElement('tr');
-    tableRow.dataset.expenseId = expenseId;
+    tableRow.dataset.expenseId = expense.id;
 
     $(tableRow).addClass(expense.category);
     $(tableRow).append(`<td data-prop="category" class="expense" contenteditable>${expense.category}</td>`);
@@ -38,7 +38,7 @@ function showNotification(note) {
 $('#expenses-data').on('keydown', '.expense', function(event) {
   const $expenseRow = $(this).parent();
   const expenseId = $expenseRow.data('expenseId');
-  const dataProp = $(this).data('property');
+  const dataProp = this.dataset.prop;
   const expenseData = { [dataProp]: $(this).text() }
 
   if (event.keyCode === 13) {
